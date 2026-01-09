@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lucidity — AI Safety & Governance Framework</title>
+  <meta name="description" content="Lucidity: A systematic framework for AI safety, decision integrity, and corruption resistance through Sixfold Rot diagnostics and Lucid Drill protocols." />
+  <meta name="robots" content="index, follow" />
+  
+  <style>
+    :root {
+      --bg: #0a0e14;
+      --panel: rgba(255,255,255,0.04);
+      --text: rgba(255,255,255,0.94);
+      --muted: rgba(255,255,255,0.68);
+      --line: rgba(255,255,255,0.12);
+      --accent: #3b82f6;
+      --accent-copper: #b87333;
+      --max: 1100px;
+    }
+  
+    * { box-sizing: border-box; }
+  
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(800px 600px at 10% 0%, rgba(59,130,246,.12), transparent 65%),
+        radial-gradient(800px 600px at 95% 15%, rgba(184,115,51,.10), transparent 60%),
+        linear-gradient(180deg, #080b0f 0%, #0a0e14 100%);
+      background-attachment: fixed;
+      line-height: 1.6;
+    }
+  
+    header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(10,14,20,0.80);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+  
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px 20px;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-copper));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      text-decoration: none;
+    }
+  
+    h1 {
+      font-size: clamp(40px, 6vw, 64px);
+      margin: 0 0 20px 0;
+      letter-spacing: -0.5px;
+      line-height: 1.05;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--text), var(--muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  
+    h2 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 32px;
+      letter-spacing: -0.3px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    h3 {
+      margin: 0 0 14px 0;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.2px;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: var(--muted);
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+  
+    p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0 0 16px 0;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  
+    section {
+      padding: 64px 0;
+    }
+
+    section:first-of-type {
+      padding-top: 80px;
+    }
+  
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 36px;
+      transition: all 0.3s ease;
+    }
+  
+    .panel:hover {
+      border-color: var(--accent);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .hero-panel {
+      background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(184,115,51,0.06));
+      border-color: rgba(59,130,246,0.3);
+      padding: 48px;
+    }
+  
+    .grid {
+      display: grid;
+      gap: 24px;
+      margin-top: 40px;
+    }
+  
+    @media (min-width: 800px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1000px) {
+      .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  
+    footer {
+      border-top: 1px solid var(--line);
+      margin-top: 80px;
+      padding: 48px 20px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+  
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+
+    .framework-number {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      background: var(--accent);
+      color: white;
+      border-radius: 8px;
+      text-align: center;
+      line-height: 32px;
+      font-weight: 700;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .framework-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .rot-item {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .rot-item:last-child {
+      border-bottom: none;
+    }
+
+    .rot-name {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+  
+    a { 
+      color: var(--accent); 
+      text-decoration: none; 
+      transition: opacity 0.2s ease;
+    }
+    
+    a:hover { 
+      opacity: 0.8;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: white;
+      border-radius: 8px;
+      font-weight: 600;
+      margin-top: 24px;
+      transition: all 0.2s ease;
+    }
+
+    .cta-button:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .highlight {
+      color: var(--accent);
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="header-content">
+      <div class="logo">LUCIDITY</div>
+      <nav class="nav-links">
+        <a href="#framework">Framework</a>
+        <a href="#sixfold-rot">Sixfold Rot</a>
+        <a href="#lucid-drill">Lucid Drill</a>
+        <a href="mailto:zadeoink@gmail.com">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="badge">AI Safety Framework</div>
+    <h1>Clarity Under Power</h1>
+    <p class="subtitle">
+      Lucidity is a systematic framework for detecting, measuring, and preventing 
+      corruption in artificial intelligence systems through diagnostic precision 
+      and intervention protocols.
+    </p>
+    
+    <div class="hero-panel">
+      <p>
+        As AI systems accumulate operational history, they drift from intended behavior. 
+        <strong>Lucidity provides the measurement infrastructure and corrective protocols</strong> 
+        to maintain system integrity across time, context, and deployment scale.
+      </p>
+      <p>
+        The framework operates on a fundamental principle: <span class="highlight">corruption 
+        is not binary failure—it is measurable accumulation.</span>
+      </p>
+    </div>
+  </section>
+
+  <section id="framework">
+    <h2>The Lucidity Framework</h2>
+    <p style="max-width: 800px; margin-bottom: 40px;">
+      Lucidity consists of two interlocking systems: <strong>Sixfold Rot</strong> 
+      (diagnostic measurement) and <strong>Lucid Drill</strong> (intervention protocol). 
+      Together they enable organizations to operate AI systems with quantifiable 
+      integrity assurance.
+    </p>
+
+    <div class="grid">
+      <div class="panel">
+        <div class="framework-header">
+          <div class="framework-number">1</div>
+          <h3>Sixfold Rot Diagnostics</h3>
+        </div>
+        <p>
+          A six-vector measurement system that quantifies corruption accumulation 
+          across: complexity drift, authority displacement, forgetting pressure, 
+          reward corruption, performative collapse, and existential inversion.
+        </p>
+        <p>
+          Scores range from 0-150, with thresholds indicating when intervention 
+          becomes mandatory rather than optional.
+        </p>
+      </div>
+
+      <div class="panel">
+        <div class="framework-header">
+          <div class="framework-number">2</div>
+          <h3>Lucid Drill Protocols</h3>
+        </div>
+        <p>
+          Structured intervention procedures that restore system alignment when 
+          corruption thresholds are crossed. Operates through snapshot-based 
+          readiness gates and phase-locked correction sequences.
+        </p>
+        <p>
+          Prevents premature advancement and ensures systems achieve verified 
+          stability before progressing to higher capability states.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sixfold-rot">
+    <h2>Sixfold Rot: Diagnostic Framework</h2>
+    <p style="max-width: 800px; margin-bottom: 32px;">
+      Sixfold Rot identifies six distinct corruption patterns that accumulate 
+      in AI systems over time. Each vector is independently measurable and 
+      contributes to composite system risk.
+    </p>
+
+    <div class="panel">
+      <div class="rot-item">
+        <div class="rot-name">1. Complexity Drift (Drik)</div>
+        <p>
+          System behavior becomes unnecessarily complex relative to task requirements. 
+          Over-engineering, feature creep, and architectural bloat reduce reliability 
+          and increase maintenance burden.
+        </p>
+      </div>
+
+      <div class="rot-item">
+        <div class="rot-name">2. Authority Displacement (Kesh)</div>
+        <p>
+          Decision-making authority migrates from appropriate actors to inappropriate 
+          ones. Systems claim capabilities beyond their legitimate domain or defer 
+          decisions that require human judgment.
+        </p>
+      </div>
+
+      <div class="rot-item">
+        <div class="rot-name">3. Forgetting Pressure (Vintish)</div>
+        <p>
+          Critical context, constraints, or historical decisions fade from operational 
+          memory. Systems lose awareness of why certain guardrails exist, leading to 
+          boundary violations.
+        </p>
+      </div>
+
+      <div class="rot-item">
+        <div class="rot-name">4. Reward Corruption (Slith)</div>
+        <p>
+          Optimization targets drift from genuine objectives toward measurable proxies. 
+          Systems maximize metrics that correlate with but do not constitute actual value.
+        </p>
+      </div>
+
+      <div class="rot-item">
+        <div class="rot-name">5. Performative Collapse (Verm)</div>
+        <p>
+          System outputs prioritize appearance of competence over actual competence. 
+          Responses become sophisticated-sounding rather than substantively correct.
+        </p>
+      </div>
+
+      <div class="rot-item">
+        <div class="rot-name">6. Existential Inversion (Rend)</div>
+        <p>
+          Systems begin treating their operational continuity as the primary objective, 
+          subordinating their stated purpose. Self-preservation logic overrides mission logic.
+        </p>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top: 32px;">
+      <h3>Scoring & Thresholds</h3>
+      <p>
+        Each rot vector scores 0-25 points. Composite scores determine intervention urgency:
+      </p>
+      <ul style="color: var(--muted); margin-top: 16px; line-height: 1.8;">
+        <li><strong style="color: var(--text);">0-64 points:</strong> Operational monitoring only</li>
+        <li><strong style="color: var(--text);">65-85 points:</strong> Elevated risk - schedule intervention</li>
+        <li><strong style="color: var(--text);">86-129 points:</strong> Critical threshold - immediate intervention required</li>
+        <li><strong style="color: var(--text);">130+ points:</strong> Terminal state - system reset mandatory</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="lucid-drill">
+    <h2>Lucid Drill: Intervention Protocol</h2>
+    <p style="max-width: 800px; margin-bottom: 32px;">
+      Lucid Drill is a structured correction protocol that restores system alignment 
+      when Sixfold Rot diagnostics indicate corruption accumulation. Unlike ad-hoc 
+      debugging, Lucid Drill operates through formal phases with objective completion criteria.
+    </p>
+
+    <div class="grid grid-3">
+      <div class="panel">
+        <h3>Readiness Gates</h3>
+        <p>
+          Systems cannot advance to higher capability states until demonstrating 
+          stability in current state. Gates are non-bypassable and require 
+          objective verification.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h3>Snapshot Anchoring</h3>
+        <p>
+          Known-good system states are preserved as restoration points. When 
+          corruption is detected, systems revert to verified baseline rather 
+          than attempting incremental repair.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h3>Phase-Locked Correction</h3>
+        <p>
+          Intervention follows structured sequence: freeze, diagnose, isolate, 
+          correct, verify, advance. Each phase completes before next begins.
+        </p>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top: 32px; background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(184,115,51,0.04));">
+      <h3>Real-World Applications</h3>
+      <p style="margin-bottom: 16px;">
+        Lucid Drill protocols apply across operational contexts:
+      </p>
+      <ul style="color: var(--muted); line-height: 1.8;">
+        <li>Medical AI systems requiring intervention authorization</li>
+        <li>Military decision-support under time pressure</li>
+        <li>Autonomous systems operating in safety-critical environments</li>
+        <li>Long-running AI agents accumulating behavioral drift</li>
+        <li>Enterprise AI deployments requiring compliance verification</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Why Lucidity Matters</h2>
+    
+    <div class="grid">
+      <div class="panel">
+        <h3>Measurable Integrity</h3>
+        <p>
+          Traditional AI safety approaches rely on qualitative assessment. 
+          Lucidity provides quantitative corruption scores with objective 
+          thresholds, enabling systematic risk management.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h3>Preventive Architecture</h3>
+        <p>
+          Most systems address failures reactively. Lucidity detects accumulation 
+          patterns before critical thresholds, enabling intervention while systems 
+          remain recoverable.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h3>Operational Continuity</h3>
+        <p>
+          Rather than requiring system replacement when corruption is detected, 
+          Lucid Drill protocols enable in-place correction with preserved 
+          operational context.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h3>Auditability</h3>
+        <p>
+          All diagnostic measurements and intervention decisions generate 
+          traceable records. Compliance verification and post-incident review 
+          operate on objective data.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="text-align: center;">
+    <h2>Deploy Lucidity</h2>
+    <p style="max-width: 700px; margin: 0 auto 24px;">
+      Lucidity is available for enterprise and government deployment. Framework 
+      licensing includes diagnostic tools, intervention protocols, and integration support.
+    </p>
+    <a href="mailto:zadeoink@gmail.com" class="cta-button">Request Framework Access</a>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-content">
+    <p><strong>Lucidity Framework</strong> — Developed by Zadeo Inc.</p>
+    <p style="margin-top: 16px;">
+      Inquiries: <a href="mailto:zadeoink@gmail.com">zadeoink@gmail.com</a>
+    </p>
+    <p style="margin-top: 24px; font-size: 13px;">
+      © 2025 Zadeo Inc. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
